@@ -295,6 +295,8 @@ define(['Q', 'underscore', 'mifosX'], function (Q) {
             'configurations/AddressFormController',
             'client/EditFamilyMemberController',
             'client/AddFamilyMembersController',
+            'organization/BulkImportOfficesController',
+            'client/BulkImportClientsController',
 			'adhocquery/AdHocQueryListController',
             'adhocquery/CreateAdHocQueryController',
             'adhocquery/ViewAdHocQueryController',

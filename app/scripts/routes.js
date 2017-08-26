@@ -923,6 +923,12 @@
             .when('/addfamilymembers/:clientId/', {
                 templateUrl: 'views/clients/addfamilymembers.html'
             })
+            .when('/bulkimportoffices', {
+                 templateUrl: 'views/organization/bulkimportoffices.html'
+             })
+             .when('/bulkimportclients', {
+                 templateUrl: 'views/clients/bulkimportclients.html'
+             })
 			.when('/adhocquery/', {
                 templateUrl: 'views/adhocquery/adhocquerylists.html'
             })
