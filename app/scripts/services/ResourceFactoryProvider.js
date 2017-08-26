@@ -41,6 +41,9 @@
                         getAllOfficesInAlphabeticalOrder: {method: 'GET', params: {orderBy: 'name', sortOrder: 'ASC'}, isArray: true},
                         update: { method: 'PUT'}
                     }),
+                    officeImportTemplateResource: defineResource(apiVer + "/offices/bulkimporttemplate", {}, {
+                    		get: {method: 'GET', params: {}}
+                    }),
                     clientResource: defineResource(apiVer + "/clients/:clientId/:anotherresource", {clientId: '@clientId', anotherresource: '@anotherresource', sqlSearch: '@sqlSearch'}, {
                         getAllClients: {method: 'GET', params: {limit: 1000, sqlSearch: '@sqlSearch'}},
                         getAllClientsWithoutLimit: {method: 'GET', params: {}},
