@@ -3,7 +3,7 @@
     	BulkImportClientsController: function (scope, resourceFactory, location, API_VERSION, $rootScope, Upload) {
         	
         	scope.first = {};
-        	scope.first.templateUrl =  API_VERSION + '/clients/bulkimporttemplate' + '?tenantIdentifier=' + $rootScope.tenantIdentifier 
+        	scope.first.templateUrl =  API_VERSION + '/clients/downloadtemplate' + '?tenantIdentifier=' + $rootScope.tenantIdentifier
         	+ '&locale=' + scope.optlang.code + '&dateFormat=' + scope.df;
         	scope.formData = {};
         	var requestParams = {staffInSelectedOfficeOnly:true};
@@ -49,11 +49,17 @@
 
             scope.changeLegalForm=function () {
             if (scope.formData.legalForm){
-                if (scope.first.queryParams.indexOf("legalFormType")==-1){
-                    scope.first.queryParams=scope.first.queryParams +'&'+'legalFormType='+scope.formData.legalForm;
-                }else {
-                    scope.first.queryParams=scope.first.queryParams.replace(/&legalFormType=\w+/i,"&legalFormType="+ scope.formData.legalForm);
+                var changedLegalForm;
+                if(scope.formData.legalForm=="Person"){
+                    changedLegalForm="CLIENTS_PERSON";
+                }else if(scope.formData.legalForm=="Entity") {
+                    changedLegalForm = "CLIENTS_ENTTTY";
                 }
+                    if (scope.first.queryParams.indexOf("legalFormType") == -1) {
+                        scope.first.queryParams = scope.first.queryParams + '&' + 'legalFormType=' + changedLegalForm;
+                    } else {
+                        scope.first.queryParams = scope.first.queryParams.replace(/&legalFormType=\w+/i, "&legalFormType=" +changedLegalForm);
+                    }
             }
         }
         	
@@ -61,9 +67,9 @@
                  scope.formData.file = files[0];
                  scope.formData.entityType=null;
                  if (scope.formData.file.name.toLowerCase().indexOf("person")!=-1) {
-                     scope.formData.entityType = "Person";
+                     scope.formData.entityType = "CLIENTS_PERSON";
                  }else if (scope.formData.file.name.toLowerCase().indexOf("entity")!=-1){
-                     scope.formData.entityType="Entity";
+                     scope.formData.entityType="CLIENTS_ENTTTY";
                  }
 
              };
@@ -71,8 +77,8 @@
          
              scope.upload = function () {
                  Upload.upload({
-                     url: $rootScope.hostUrl + API_VERSION + '/clients/bulkuploadtemplate?legalFormType='+scope.formData.entityType+'',
-                     data: {file: scope.formData.file},
+                     url: $rootScope.hostUrl + API_VERSION + '/clients/uploadtemplate?legalFormType='+scope.formData.entityType+'',
+                     data: {file: scope.formData.file,locale:scope.optlang.code,dateFormat:scope.df},
                  }).then(function (data) {
                          // to fix IE not refreshing the model
                          if (!scope.$$phase) {

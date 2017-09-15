@@ -3,7 +3,7 @@
         BulkImportJournalEntriesController: function (scope, resourceFactory, location, API_VERSION, $rootScope, Upload) {
 
             scope.first = {};
-            scope.first.templateUrl =  API_VERSION + '/journalentries/bulkimporttemplate' + '?tenantIdentifier=' + $rootScope.tenantIdentifier
+            scope.first.templateUrl =  API_VERSION + '/journalentries/downloadtemplate' + '?tenantIdentifier=' + $rootScope.tenantIdentifier
                 + '&locale=' + scope.optlang.code + '&dateFormat=' + scope.df;
             scope.formData = {};
             var requestParams = {staffInSelectedOfficeOnly:true};
@@ -32,8 +32,8 @@
 
             scope.upload = function () {
                 Upload.upload({
-                    url: $rootScope.hostUrl + API_VERSION + '/journalentries/bulkuploadtemplate',
-                    data: {file: scope.formData.file},
+                    url: $rootScope.hostUrl + API_VERSION + '/journalentries/uploadtemplate',
+                    data: {file: scope.formData.file,locale:scope.optlang.code,dateFormat:scope.df},
                 }).then(function (data) {
                     // to fix IE not refreshing the model
                     if (!scope.$$phase) {

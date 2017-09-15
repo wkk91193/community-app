@@ -3,7 +3,7 @@
         BulkImportLoanAccountsController: function (scope, resourceFactory, location, API_VERSION, $rootScope, Upload) {
 
             scope.first = {};
-            scope.first.templateUrl =  API_VERSION + '/loans/bulkimporttemplate' + '?tenantIdentifier=' + $rootScope.tenantIdentifier
+            scope.first.templateUrl =  API_VERSION + '/loans/downloadtemplate' + '?tenantIdentifier=' + $rootScope.tenantIdentifier
                 + '&locale=' + scope.optlang.code + '&dateFormat=' + scope.df;
             scope.formData = {};
             var requestParams = {staffInSelectedOfficeOnly:true};
@@ -53,8 +53,8 @@
 
             scope.upload = function () {
                 Upload.upload({
-                    url: $rootScope.hostUrl + API_VERSION + '/loans/bulkuploadtemplate',
-                    data: {file: scope.formData.file},
+                    url: $rootScope.hostUrl + API_VERSION + '/loans/uploadtemplate',
+                    data: {file: scope.formData.file,locale:scope.optlang.code,dateFormat:scope.df},
                 }).then(function (data) {
                     // to fix IE not refreshing the model
                     if (!scope.$$phase) {
