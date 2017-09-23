@@ -10,6 +10,17 @@
         	 scope.onFileSelect = function (files) {
                  scope.formData.file = files[0];
              };
+             
+             resourceFactory.importResource.getImports({entityType: "offices"},function (data) {
+                 
+                 for (var l in data) {
+                	 	var importdocs = {};
+                	 	importdocs = API_VERSION + '/import/' + data[l].importId + '/documents/' + data[l].documentId + '/attachment?tenantIdentifier=' + $rootScope.tenantIdentifier;
+                 	data[l].docUrl = importdocs;
+                 }
+                 scope.imports = data;
+             });
+             
           
          
              scope.upload = function () {
