@@ -18,8 +18,6 @@
                 scope.saveSC();
             };
 
-            scope.ShareProductsPerPage = 15;
-
             scope.$broadcast('ShareProductDataLoadingStartEvent');
             resourceFactory.shareProduct.getAll(function(data) {
                 scope.shareproducts = data;
