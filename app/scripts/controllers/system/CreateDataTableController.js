@@ -17,9 +17,9 @@
                     scope.columnnameerror = false;
                     scope.columntypeerror = false;
                     scope.columns.push({name: scope.datatableTemplate.columnName, type: scope.datatableTemplate.columnType, mandatory: false});
-                    scope.datatableTemplate.columnName = undefined;
-                    scope.datatableTemplate.columnType = undefined;
-                } else if (!scope.datatableTemplate.columnName) {
+                    // scope.datatableTemplate.columnName = undefined;
+                    // scope.datatableTemplate.columnType = undefined;
+                }else if (!scope.datatableTemplate.columnName) {
                     scope.errorDetails = [];
                     scope.columnnameerror = true;
                     scope.labelerror = "columnnameerr";
